@@ -1,0 +1,6 @@
+packetbeat.interfaces.device: any
+packetbeat.protocols:
+  http:
+    ports: [80, 443, 3000, 8080, 8100, 8200, 8300]
+output.elasticsearch:
+  hosts: ["http://opensearch:9200"]
