@@ -26,6 +26,10 @@ services:
       - opensearch-data:/usr/share/opensearch/data
     networks:
       - mynetwork
+    deploy:
+      resources:
+        limits:
+          memory: 2g
 
   logstash:
     image: docker.elastic.co/logstash/logstash:7.12.1
@@ -41,6 +45,10 @@ services:
       - "opensearch:${LOCAL_IP}"
     depends_on:
       - opensearch
+    deploy:
+      resources:
+        limits:
+          memory: 1g 
 
   packetbeat:
     build:
@@ -76,7 +84,7 @@ services:
     container_name: kibana
     environment:
       OPENSEARCH_HOSTS: '["http://opensearch:9200"]'
-      DISABLE_SECURITY_DASHBOARDS_PLUGIN: true
+      DISABLE_SECURITY_DASHBOARDS_PLUGIN: "true"
     ports:
       - "5601:5601"
     networks:
@@ -85,6 +93,10 @@ services:
       - opensearch
     extra_hosts:
       - "opensearch:${LOCAL_IP}"
+    deploy:
+      resources:
+        limits:
+          memory: 1g
 
 networks:
   mynetwork:
