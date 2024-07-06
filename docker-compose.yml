@@ -41,8 +41,6 @@ services:
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
     networks:
       - mynetwork
-    extra_hosts:
-      - "opensearch:${LOCAL_IP}"
     depends_on:
       - opensearch
     deploy:
@@ -91,8 +89,6 @@ services:
       - mynetwork
     depends_on:
       - opensearch
-    extra_hosts:
-      - "opensearch:${LOCAL_IP}"
     deploy:
       resources:
         limits:
