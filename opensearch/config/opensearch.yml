@@ -1,0 +1,4 @@
+compatibility.override_main_response_version: true
+network.host: 0.0.0.0
+discovery.type: single-node
+bootstrap.memory_lock: true

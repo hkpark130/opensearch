@@ -1,2 +1,4 @@
 http.host: "0.0.0.0"
-xpack.monitoring.enabled: false
+# xpack.monitoring.enabled: false
+# xpack.monitoring.elasticsearch.ssl.verification_mode: none
+# xpack.monitoring.elasticsearch.hosts: ["http://opensearch:9200"]

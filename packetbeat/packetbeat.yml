@@ -1,6 +1,17 @@
 packetbeat.interfaces.device: any
 packetbeat.protocols:
   http:
-    ports: [80, 443, 3000, 8080, 8100, 8200, 8300]
+    ports: [80, 443, 5601, 8080, 8100, 8200, 8300]
 output.elasticsearch:
   hosts: ["http://opensearch:9200"]
+  index: "packetbeat-%{+yyyy.MM.dd}"
+setup.template:
+  enabled: true
+  name: "packetbeat"
+  pattern: "packetbeat-*"
+  settings:
+    index.number_of_shards: 1
+    index.number_of_replicas: 0
+    index.codec: best_compression
+  dashboards.enabled: true
+  
