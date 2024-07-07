@@ -12,6 +12,8 @@ RUN wget -qO packetbeat.tar.gz https://artifacts.elastic.co/downloads/beats/pack
 # Copy your packetbeat configuration file into the container
 COPY packetbeat.yml ./packetbeat-7.12.1-linux-x86_64/packetbeat.yml
 
+RUN chmod go-w ./packetbeat-7.12.1-linux-x86_64/packetbeat.yml
+
 RUN chmod +x ./packetbeat-7.12.1-linux-x86_64/packetbeat
 
 # Start Packetbeat

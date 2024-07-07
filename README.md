@@ -50,3 +50,4 @@ packetbeat 인덱스가 자동으로 만들어 졌는지 확인 필요
 ![data-source](./image/data-source.png)
 데이터 소스 추가는 했지만 오픈서치 데이터 소스를 기반으로 한 대시보드 라이브러리가 없어서 grafana는 포기  
 
+docker-compose 1.27.2 버전

@@ -22,14 +22,12 @@ services:
       - "9200"  # 다른 컨테이너가 접근
       - "9600"
     volumes:
-      - ./opensearch/config/opensearch.yml:/usr/share/opensearch/config/opensearch.yml:ro,Z
+      - ./opensearch/config/opensearch.yml:/usr/share/opensearch/config/opensearch.yml
       - opensearch-data:/usr/share/opensearch/data
     networks:
       - mynetwork
-    deploy:
-      resources:
-        limits:
-          memory: 2g
+    # mem_limit: 300m # t2.micro 에서는 리소스 부족해서 인스턴스가 죽음
+    # cpus: "0.3" # t2.micro 에서는 리소스 부족해서 인스턴스가 죽음
 
   logstash:
     image: docker.elastic.co/logstash/logstash:7.12.1
@@ -43,10 +41,10 @@ services:
       - mynetwork
     depends_on:
       - opensearch
-    deploy:
-      resources:
-        limits:
-          memory: 1g 
+    extra_hosts:
+      - "opensearch:${LOCAL_IP}"
+    # mem_limit: 100m # t2.micro 에서는 리소스 부족해서 인스턴스가 죽음
+    # cpus: "0.1" # t2.micro 에서는 리소스 부족해서 인스턴스가 죽음
 
   packetbeat:
     build:
@@ -66,6 +64,8 @@ services:
       - "opensearch:${LOCAL_IP}"
     depends_on:
       - opensearch
+    mem_limit: 100m
+    cpus: "0.1"
   
   # grafana:
   #   image: grafana/grafana:8.0.6
@@ -89,10 +89,10 @@ services:
       - mynetwork
     depends_on:
       - opensearch
-    deploy:
-      resources:
-        limits:
-          memory: 1g
+    extra_hosts:
+      - "opensearch:${LOCAL_IP}"
+    mem_limit: 100m
+    cpus: "0.1"
 
 networks:
   mynetwork:
